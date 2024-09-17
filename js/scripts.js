@@ -40,8 +40,15 @@ multiplicacaoForm.addEventListener("submit", (e) => {
     const numeroMultiplicacao = +numeroInput.value;
     const numeroMultiplicador = +multiplicadorInput.value;
 
-    // verifica se os valores de entrada existem, ou seja, se foram preenchidos
-    if (!numeroMultiplicacao || !numeroMultiplicador) return;
+    // valida números digitados
+    const ehNumeroValido = (value) => {
+        const num = Number(value);
+        return !isNaN(num) && num > 0 && Number.isInteger(num);
+    };
+    if (!ehNumeroValido(numeroMultiplicacao) || !ehNumeroValido(numeroMultiplicador)) {
+        alert("Por favor, insira números inteiros positivos.");
+        return;
+    }
 
     // invoca a função para criar a tabela, passando os numeros no parametro
     criarTabela(numeroMultiplicacao, numeroMultiplicador);
